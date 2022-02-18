@@ -32,7 +32,7 @@ public:
             if(nums[j]==0)
                 count++;
             if(count<=1){
-                len=max(len,j-i);
+                len=max(len,j-i);  //not j-i+1 because have to tell the length after deleting 0
                 j++;
             }else{
                 while(count>1){
