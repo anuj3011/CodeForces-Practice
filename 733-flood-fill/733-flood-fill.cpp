@@ -4,10 +4,6 @@ public:
         int n=image.size();
         int m=image[0].size();
         vector<vector<bool>> vis(n,vector<bool>(m,false));
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++)
-                vis[i][j]=false;
-        }
         dfs(image,n,m,sr,sc,newColor,vis);
         image[sr][sc]=newColor;
         return image;
