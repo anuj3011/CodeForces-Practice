@@ -1,31 +1,40 @@
 class Solution {
 public:
-   int minSubArrayLen(int target, vector<int>& nums) {
-        int Min = INT_MAX;
-        int Sum = nums[0];
-        int subSize = 1;
-        int startIndex = 0;
-        if(Sum>=target)
-            return 1;
-        for(int i=1;i<nums.size();i++){
-            if(Sum+nums[i]<target){
-                Sum+=nums[i];
-                subSize+=1;
+   int minSubArrayLen(int k, vector<int>& nums) {
+           int size=INT_MAX;
+        int i=0,j=0;
+        int sum=0;
+        while(j<nums.size()){
+            sum+=nums[j];
+            if(sum<k){
+                j++;
             }
+            // else if(sum==k)
+            // {
+            //     cout<<"if"<<i<<" "<<j<<endl;
+            //     size=min(j-i+1,size);
+            //     j++;
+            // }
             else{
-                Sum=Sum+nums[i];
-                subSize+=1;
-                while(Sum>=target){
-                    Sum-=nums[startIndex];
-                    startIndex++;
-                    subSize--;
+                //  size=min(j-i+1,size);
+                // cout<<"else"<<i<<" "<<j<<endl;
+                while(sum>=k){
+                   size=min(j-i+1,size);
+                    if(nums[i]>0)
+                        sum-=nums[i];
+                    else
+                        sum+=nums[i];
+                    i++;
                 }
-                if(subSize+1<Min)
-                    Min=subSize+1;
+                cout<<"else"<<i<<" "<<j<<endl;
+                // if(i==j)
+                //     size=1;
+                // else
+                // cout<<j-i+1;
+                //     size=min(j-i+2,size);
+                j++;
             }
         }
-        if(Min>nums.size())
-            Min=0;
-        return Min;
+        return (size==INT_MAX)?0:size;
    }
 };
