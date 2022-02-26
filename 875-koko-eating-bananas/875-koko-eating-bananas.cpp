@@ -2,7 +2,7 @@ class Solution {
 public:
     
      bool isValid(vector<int> nums, int mx, int m){
-        long long count=0;
+        int count=0;
         cout<<mx<<endl;
          int n=nums.size();
         for(int i=0;i<n;i++){
@@ -19,14 +19,14 @@ public:
     }
     
     int minEatingSpeed(vector<int>& nums, int m) {
-        long long sum=0,res=-1;
+        int sum=0,res=-1,mx=-1;
         for(int i=0;i<nums.size();i++){
-            // mx=max(mx,nums[i]);
-            sum+=nums[i];
+            mx=max(mx,nums[i]);
+            // sum+=nums[i];
         }
-        long long start=1,end=sum;
+        int start=1,end=mx;
         while(start<=end){
-            long long mid= start+ (end-start)/2;
+            int mid= start+ (end-start)/2;
             if(isValid(nums,mid,m)){
                 end=mid-1;
                 res=mid;
