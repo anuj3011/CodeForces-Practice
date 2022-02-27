@@ -2,15 +2,17 @@ typedef pair<int,int> pi;
 class Solution {
 public:
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
-        priority_queue<pi,vector<pi>,greater<pi>> minH;
+        priority_queue<pi> maxH;
         for(int i=0;i<arr.size();i++){
-            minH.push({abs(x-arr[i]),arr[i]});
+            maxH.push({abs(x-arr[i]),arr[i]});
+            if(maxH.size()>k)
+                maxH.pop();
+                
         }
         vector<int> ans;
-        for(int i=0;i<k;i++){
-            auto temp=minH.top();
-            minH.pop();
-            ans.push_back(temp.second);
+        while(!maxH.empty()){
+            ans.push_back(maxH.top().second);
+            maxH.pop();
         }
         sort(ans.begin(),ans.end());
         return ans;
