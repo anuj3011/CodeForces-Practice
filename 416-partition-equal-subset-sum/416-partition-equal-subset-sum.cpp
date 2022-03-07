@@ -13,22 +13,22 @@ public:
 //         return dp[ind][target]= take||notTake;
 //     }
     
-//     bool canPartition(vector<int>& nums) {
-//         int sum=0;
-//         for(auto it: nums) sum+=it;
-//         if(sum&1) return false;
-//         int target=sum/2;
-//         vector<vector<int>> dp(nums.size(),vector<int>(target+1,-1));
-//         return checkSubset(nums,dp,target,nums.size()-1);
-//     }
-        bool canPartition(vector<int>& nums) {
-        int n = nums.size();
-        int total = accumulate(nums.begin(),nums.end(),0);
-        if(total & 1) return false;    // if total sum is odd return false
-        int target = total/2;
-        vector<vector<int>>dp(n+1, vector<int>(target+1,-1));
-        return fun(n-1,target,nums,dp); 
+    bool canPartition(vector<int>& nums) {
+        int sum=0;
+        for(auto it: nums) sum+=it;
+        if(sum&1) return false;
+        int target=sum/2;
+        vector<vector<int>> dp(nums.size(),vector<int>(target+1,-1));
+        return fun(nums.size()-1,target,nums,dp);
     }
+    //     bool canPartition(vector<int>& nums) {
+    //     int n = nums.size();
+    //     int total = accumulate(nums.begin(),nums.end(),0);
+    //     if(total & 1) return false;    // if total sum is odd return false
+    //     int target = total/2;
+    //     vector<vector<int>>dp(n+1, vector<int>(target+1,-1));
+    //     return fun(n-1,target,nums,dp); 
+    // }
     int fun(int index, int target, vector<int>& nums, vector<vector<int>>& dp){
         if(target == 0) return 1;
         if(index == 0) {
