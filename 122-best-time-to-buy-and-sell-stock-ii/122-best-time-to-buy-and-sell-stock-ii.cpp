@@ -19,26 +19,44 @@ public:
     //     return dp[ind][buy] =profit;
     // }
     
-    int maxProfit(vector<int>& prices){
-        // vector<vector<int>> dp(prices.size(), vector<int> (2,-1));
-        // return f(0,true,prices,dp);
+        int maxProfit(vector<int>& prices){  
         
-        vector<int> ahead(2,0),curr(2,0);
-        ahead[0]=ahead[1]=0;
+        int aheadBuy,aheadNotBuy,currBuy,currNotBuy;
+        aheadBuy=aheadNotBuy=0;
         for(int i=prices.size()-1;i>=0;i--){
-            for(int buy=0;buy<=1;buy++){
-                int profit=0;
-                if(buy){
-                    profit= max(-prices[i] + ahead[0],
-                                ahead[1]);
-                }else{
-                    profit= max(prices[i] + ahead[1],
-                                ahead[0]);
-                }
-                curr[buy]=profit;
-            }
-            ahead=curr;
+            currBuy= max(-prices[i] + aheadNotBuy, aheadBuy);
+            currNotBuy= max(prices[i] + aheadBuy,  aheadNotBuy);
+            
+            
+            aheadBuy=currBuy;
+            aheadNotBuy=currNotBuy;
         }
-        return ahead[1];
+        return aheadBuy;
     }
+    
+    
+    
+    
+//     int maxProfit(vector<int>& prices){  //space optimized with array
+//         // vector<vector<int>> dp(prices.size(), vector<int> (2,-1));
+//         // return f(0,true,prices,dp);
+        
+//         vector<int> ahead(2,0),curr(2,0);
+//         ahead[0]=ahead[1]=0;
+//         for(int i=prices.size()-1;i>=0;i--){
+//             for(int buy=0;buy<=1;buy++){
+//                 int profit=0;
+//                 if(buy){
+//                     profit= max(-prices[i] + ahead[0],
+//                                 ahead[1]);
+//                 }else{
+//                     profit= max(prices[i] + ahead[1],
+//                                 ahead[0]);
+//                 }
+//                 curr[buy]=profit;
+//             }
+//             ahead=curr;
+//         }
+//         return ahead[1];
+//     }
 };
