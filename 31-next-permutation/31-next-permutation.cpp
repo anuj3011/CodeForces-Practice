@@ -10,7 +10,7 @@ public:
             nums[i]=nums[j];
             nums[j]=temp;
         }
-        reverse(nums.begin() + i+1,nums.end());
+        sort(nums.begin() + i+1,nums.end());
     }
    
 };
